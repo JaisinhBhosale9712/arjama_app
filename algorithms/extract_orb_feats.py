@@ -38,7 +38,7 @@ def orb_new(image):
     x=[]
     y=[]
     intensity=[]
-
+    print('hello :)')
     for each_kp in kp:
         x.append("{:.2f}".format(each_kp.pt[0]))
         y.append("{:.2f}".format(each_kp.pt[1]))
