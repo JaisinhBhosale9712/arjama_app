@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peak Finding</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='images/DESY_logo_3C_web.png')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../static/styles/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script>
+
+</head>
+
+
+
+<body>
+<div class="header">
+<a href="/"><image class="header_image" src="{{url_for('static',filename='images/DESY_logo_3C_web.png')}}" alt="DESY" /></a>
+<a href="javascript:location.reload()" style="text-decoration: none"><h1 style="padding-right: 65px" class="heading">{{algorithm}}</h1></a>
+<span> </span>
+</div>
+
+<div class="sub_header">
+<form action="" enctype="multipart/form-data" method="post" name="form_">
+<input class="form-control" type="file" accept="image/*" class="file" name="file" id="files_"/>
+<input class="button extra_button_submit" onclick="not_download()" type="submit" id="" value="View"/>
+<input style="margin-left: 10px" class="button extra_button_submit" onclick="download()" type="submit" id="True" value="Download"/>
+<h3 style="color: #c4c2c2;">Re-upload file before clicking on Download</h3>
+</form>
+</div>
+
+
+<div class="images_return">
+<div class="flex_image_text">
+{% if number_kp %}
+<span class="key_points_text">Original Image</span>
+{% endif %}
+<image class="image_front_end" src="data:image/jpeg;character=utf-8;base64, {{img_og}}" alt=" " />
+</div>
+<div class="flex_image_text">
+{% if number_kp %}
+<span class="key_points_text">Processed Image</span>
+{% endif %}
+<image class="image_front_end" src="data:image/jpeg;character=utf-8;base64, {{img_processed}}" alt=" " />
+</div>
+</div>
+
+{% if number_kp %}
+<div class="flex_image_text" style="width: 50vw">
+    <span style="font-size: 25px" class="key_points_text">The total number of Key points detected are {{number_kp}}<span color="white">{{number_kpi}}</span></span>
+</div>
+{% endif %}
+</body>
+<script>
+function not_download(){
+    document.form_.action="/upload?algorithm={{algorithm}}"
+}
+async function download(){
+    document.form_.action="/upload?algorithm={{algorithm}}&download=True"
+
+}
+</script>
+</html>
